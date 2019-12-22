@@ -42,7 +42,7 @@ object JavaCompiler {
 
 
     def hotCompile(f: File,plugin:PluginBase) : Unit = {
-      JavaCompiler compile f
+      JavaCompiler compile new File(f+"/src")
       val outRoot = JavaCompiler getOutRootPath f
       val jarFile = plugin.getDataFolder.getParentFile+outRoot.getName+".hotcompile.jar"
       DevJar.devJar(outRoot.toString,jarFile) //打包
