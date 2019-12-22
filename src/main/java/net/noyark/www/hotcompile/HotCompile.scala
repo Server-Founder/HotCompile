@@ -14,8 +14,7 @@ class HotCompile extends PluginBase{
     this.saveDefaultConfig()
     if(this.getConfig.getBoolean("about"))HotMessageInfo.aboutIt()
     val files = this.getDataFolder.listFiles()
-    if(files!=null)
-      files.foreach(f=>JavaCompiler hotCompile(f,this))
+    if(files!=null)files.foreach(f=>if(f.isDirectory)JavaCompiler hotCompile(f,this))
   }
 
   override def onCommand(sender: CommandSender, command: Command, label: String, args: Array[String]): Boolean =
