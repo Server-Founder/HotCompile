@@ -4,6 +4,7 @@
     <root id="archive" name="HotCompile.jar">
       <element id="module-output" name="HotCompile" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.13.0/scala-library-2.13.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.6/commons-io-2.6.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

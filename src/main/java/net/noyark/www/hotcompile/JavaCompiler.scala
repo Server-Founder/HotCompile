@@ -40,7 +40,7 @@ object JavaCompiler {
         getFilePaths(file,list)
         getDepend()
         FileUtils.writeLines(makeFile,list,false)
-        compiler.run(null,null,null,"-classpath",classPath,
+        compiler.run(null,null,null,"-cp",classPath,
             "-sourcepath","src","@"+makeFile,"-d",out.toString
         )
     }
@@ -63,8 +63,9 @@ object JavaCompiler {
       var s = File.separator.replace("/", ":").replace("\\", ";");
       val builder = new StringBuilder(classPath)
       pluginsFiles.stream().forEach(x=>builder.append(x).append(s))
-      builder.append(Server.getInstance().getFilePath)
+      builder.append(classOf[Server].getProtectionDomain.getCodeSource.getLocation.toString.replace("file:",""))
       classPath = builder.toString()
+      println(classPath)
     }
 
   }
