@@ -48,6 +48,7 @@ object JavaCompiler {
   private def getDepend(): Unit ={
     if(pluginsFiles.isEmpty){
       val method = classOf[PluginBase].getDeclaredMethod("getFile")
+      method.setAccessible(true)
       Server.getInstance().getPluginManager.getPlugins.entrySet().stream().forEach(
         x=>{
           pluginsFiles.add(method.invoke(x.getValue.asInstanceOf[PluginBase]).asInstanceOf[File])
@@ -59,11 +60,11 @@ object JavaCompiler {
   //-classpath
   private def dependString(): Unit ={
     if(classPath.equals("")){
+      var s = File.separator.replace("/", ":").replace("\\", ";");
       val builder = new StringBuilder(classPath)
-      pluginsFiles.stream().forEach(x=>{
-        if(pluginsFiles.size()!=1) builder.append(x).append(File.separator.replace("/",":").replace("\\",";")) //linux : windows ;
-        else builder.append(x)
-      })
+      pluginsFiles.stream().forEach(x=>builder.append(x).append(s))
+      builder.append(Server.getInstance().getFilePath)
+      classPath = builder.toString()
     }
 
   }
