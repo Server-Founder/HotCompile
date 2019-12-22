@@ -39,8 +39,18 @@ object JavaCompiler {
         }
         getFilePaths(file,list)
         getDepend()
+        val files = file.listFiles()
+        val otherFile = new StringBuilder()
+        if(files!=null){
+          val s = File.separator.replace("/", ":").replace("\\", ";")
+          for(f <- files){
+            if(f.toString.endsWith(".jar")){
+              otherFile.append(s).append(f.toString)
+            }
+          }
+        }
         FileUtils.writeLines(makeFile,list,false)
-        compiler.run(null,null,null,"-cp",classPath,
+        compiler.run(null,null,null,"-cp",classPath+otherFile.toString(),
             "-sourcepath","src","@"+makeFile,"-d",out.toString
         )
     }
@@ -65,7 +75,6 @@ object JavaCompiler {
       pluginsFiles.stream().forEach(x=>builder.append(x).append(s))
       builder.append(classOf[Server].getProtectionDomain.getCodeSource.getLocation.toString.replace("file:",""))
       classPath = builder.toString()
-      println(classPath)
     }
 
   }
