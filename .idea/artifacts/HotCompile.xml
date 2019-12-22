@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="HotCompile">
+    <output-path>$PROJECT_DIR$/out/artifacts/HotCompile</output-path>
+    <root id="archive" name="HotCompile.jar">
+      <element id="library" level="project" name="Maven: org.scala-lang:scala-library:2.13.0" />
+    </root>
+  </artifact>
+</component>
