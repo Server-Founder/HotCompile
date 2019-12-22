@@ -12,7 +12,7 @@ class HotCompile extends PluginBase{
   override def onEnable(): Unit = {
     HotCompile.hot = this
     this.saveDefaultConfig()
-    if(this.getConfig.getBoolean("about"))HotMessageInfo aboutIt()
+    if(this.getConfig.getBoolean("about"))HotMessageInfo.aboutIt()
     val files = this.getDataFolder.listFiles()
     if(files!=null)
       files.foreach(f=>JavaCompiler hotCompile(f,this))
